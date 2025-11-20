@@ -1,0 +1,7 @@
+{
+  "name": "智构·Gemini (SmartBuild)",
+  "description": "基于 Gemini 3 Pro 的应用孵化器，将抽象想法转化为专业的开发文档。",
+  "requestFramePermissions": [
+    "microphone"
+  ]
+}
