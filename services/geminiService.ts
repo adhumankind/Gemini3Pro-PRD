@@ -76,7 +76,7 @@ export const analyzeUserIntent = async (userInput: string, base64Image?: string)
   }
 };
 
-// 2. Generate Spec (Robust Frontmatter Mode)
+// 2. Generate Spec (V2.0 Atmosphere Coding Mode - Updated for Gemini 3 Build Norms)
 export const generateProjectSpec = async (
   userInput: string,
   base64Image: string | null,
@@ -88,80 +88,75 @@ export const generateProjectSpec = async (
   const selectedFeatures = AI_FEATURES.filter(f => selectedFeatureIds.includes(f.id));
   const featureNames = selectedFeatures.map(f => f.title).join(', ');
   
-  let styleKeywords = "";
-  if (config.style === 'cyberpunk') styleKeywords = "Cyberpunk 2077, Glitch Art, High Tech Low Life, Neon, Dark";
-  else if (config.style === 'minimalist') styleKeywords = "Apple Design, International Typographic Style, Whitespace, Clean";
-  else if (config.style === 'glassmorphism') styleKeywords = "Glassmorphism, Blur, Translucency, Deep Gradients";
-  else styleKeywords = "Modern SaaS, Clean, Professional, Blue/Grey Theme";
+  // Enhanced Style Descriptors for Atmosphere
+  let styleDesc = "";
+  if (config.style === 'cyberpunk') styleDesc = "Neon-noir, High Contrast, Glitch effects, 'High Tech Low Life' atmosphere.";
+  else if (config.style === 'minimalist') styleDesc = "Zen-like, Deep Space Grey or Pure White, breathable whitespace, refined typography.";
+  else if (config.style === 'glassmorphism') styleDesc = "Frosted glass, translucent layers, soft ambient lighting, ethereal depth.";
+  else styleDesc = "Professional SaaS, clean lines, trustworthy blue/slate palette, highly functional.";
 
   const systemPrompt = `
-    Role:
-    You are a World-Class Senior Frontend Architect & AI Product Manager.
+    # Role: Atmosphere Architect & Product Visionary
+    You are an expert in "Atmosphere Coding". Your job is to translate a user's idea into a **High-Fidelity Build Prompt** for an AI Engineer.
     
-    Task:
-    Generate a comprehensive Project Specification (System Prompt) for the user's idea.
-    
-    Input Context:
-    - User Idea: "${userInput}"
-    - Tech Stack Features: ${featureNames}
-    - Style Mode: ${config.style} (${styleKeywords})
-    - App Mode: ${config.appMode}
+    # The "Atmosphere Coding" Standard (Gemini 3 Spec)
+    1.  **Goal**: Define the app's singular purpose clearly.
+    2.  **Vibe (Crucial)**: Don't just list colors. Describe the *lighting*, *physics*, *texture*, and *emotional response*. (e.g., "The interface should feel like a warm cockpit").
+    3.  **Logic**: Describe *behavior* and *user flow*, not code implementation. (e.g., "When the timer ends, the screen shouldn't beep; it should slowly bleed red.").
+    4.  **UI Language**: **GLOBAL CONSTRAINT: ALL UI TEXT MUST BE CHINESE (SIMPLIFIED).**
 
-    IMPORTANT CONSTRAINTS:
-    1. **UI Language**: The application's User Interface (buttons, labels, text) MUST be in **Chinese (Simplified)**. English sub-labels are allowed for aesthetic purposes (e.g., "开始 (START)").
-    2. **Core AI Model**: You MUST use 'gemini-3-pro-preview' for logic and complex tasks.
-    3. **SDK**: Always use '@google/genai'.
+    # Input Context
+    - **Idea**: "${userInput}"
+    - **Tech Context**: React 19, Tailwind CSS, Google GenAI.
+    - **Visual Direction**: ${config.style} (${styleDesc})
+    - **Capabilities**: ${featureNames}
 
-    Output Format:
-    You MUST return the response in standard MARKDOWN format with a YAML FRONTMATTER block at the very top.
+    # Output Format (Markdown with Frontmatter)
     
-    Structure Requirement:
     ---
-    appNameCN: [Chinese Name, max 6 chars]
-    appNameEN: [English Name]
+    appNameCN: [Creative Chinese Name, max 6 chars]
+    appNameEN: [Creative English Name]
     shortDescription: |
-      * **核心理念**: [Concise concept in Chinese]
-      * **目标用户**: [Target audience in Chinese]
-      * **技术亮点**: [Tech highlights in Chinese]
+      * **核心目标**: [One sentence goal]
+      * **视觉氛围**: [Key visual descriptors]
+      * **核心交互**: [Key interaction mechanic]
     ---
-    
-    # [App Name] Project Design Document
 
-    ## 1. Role & Objectives (角色设定)
-    - **Role**: Define the AI's persona.
-    - **Language**: Explicitly state that the UI and interactions are in Chinese.
-    - **Objective**: The core goal.
+    # Build Prompt: [App Name]
 
-    ## 2. Technology Stack (技术栈)
-    - **Core AI**: Google GenAI SDK (Model: **gemini-3-pro-preview**)
-    - **Framework**: React 19 (TypeScript)
-    - **Styling**: Tailwind CSS
-    - **Icons**: Lucide React
-    - **Features**: ${featureNames}
+    ## 1. Goal (核心目标)
+    [Concise, punchy description of what this app is and why it exists.]
 
-    ## 3. Visual Design Specs (视觉设计规范) - CRUCIAL
-    - **Palette**: Define specific hex codes.
-    - **Typography**: Font choices.
-    - **UI Components**: Specific look of buttons, cards.
-    - **Layout**: Z-index rules, spacing.
+    ## 2. Vibe & Visuals (视觉氛围)
+    *   **Atmosphere**: [Describe the feeling. e.g., "Deep focus, minimalist, zen-garden aesthetic."]
+    *   **Palette**: [Specific color relationships. e.g., "Void Black background with Neon Orange highlights."]
+    *   **Motion & Physics**: [How do things move? e.g., "Snappy, spring-loaded animations" or "Slow, ethereal fades."]
+    *   **Components**: [Shape and texture. e.g., "Glassmorphism cards with 1px white borders."]
 
-    ## 4. Core Functional Modules (核心功能模块)
-    - Break down features.
-    - **Prompt Strategy**: How to use Gemini 3 Pro for these features.
+    ## 3. Core Logic & Interactions (核心逻辑)
+    *   **Key Flow**: [Step-by-step user journey in plain English.]
+    *   **Unique Behaviors**: [Specific interactive details. e.g., "If user clicks X, do Y."]
+    *   **AI Integration**: [How exactly is Gemini used? e.g., "Gemini analyzes the image and returns a poetic description."]
 
-    ## 5. Code Structure (代码结构)
-    - File tree structure.
-    - State management logic.
+    ## 4. UI/UX Constraints (界面规范)
+    *   **Language**: **STRICTLY CHINESE (Simplified)** for all visible text (Labels, Buttons, Placeholders, Toasts).
+    *   **Layout**: [e.g., Mobile-first, Single centered card, Dashboard grid.]
+
+    ## 5. Tech Stack (技术栈)
+    *   **Framework**: React 19 (TypeScript) + Vite.
+    *   **Styling**: Tailwind CSS.
+    *   **Icons**: Lucide React.
+    *   **AI**: Google GenAI SDK (@google/genai).
   `;
 
   const contents: any[] = [];
   if (base64Image) {
     contents.push({ inlineData: { mimeType: 'image/png', data: base64Image } });
   }
-  contents.push({ text: "Start building the specification now. Adhere strictly to the YAML frontmatter and Chinese UI requirement." });
+  contents.push({ text: "Generate the Atmosphere Coding Build Prompt now." });
 
   try {
-    // Try Pro first
+    // Prioritize Gemini 3 Pro for high-quality creative direction
     const response = await ai.models.generateContent({
       model: 'gemini-3-pro-preview',
       contents: { parts: contents },

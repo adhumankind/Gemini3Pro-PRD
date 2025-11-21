@@ -1,6 +1,6 @@
 {
-  "name": "智构·Gemini (SmartBuild)",
-  "description": "基于 Gemini 3 Pro 的应用孵化器，将抽象想法转化为专业的开发文档。",
+  "name": "智构·Gemini (SmartBuild) 2.0",
+  "description": "基于 Gemini 3 Pro 的 2.0 版本。采用氛围编码（Atmosphere Coding）理念，生成 PM+设计师级的专业开发文档。",
   "requestFramePermissions": [
     "microphone"
   ]

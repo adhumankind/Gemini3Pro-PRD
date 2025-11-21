@@ -76,7 +76,7 @@ const App: React.FC = () => {
                <div className="p-2 bg-slate-900 rounded-xl border border-slate-800 group-hover:border-indigo-500/50 group-hover:shadow-[0_0_20px_rgba(99,102,241,0.3)] transition-all">
                  <Bot className="w-6 h-6 text-white" />
                </div>
-               <h1 className="font-bold text-2xl tracking-tight text-white">智构<span className="text-indigo-400 font-light">·Gemini</span></h1>
+               <h1 className="font-bold text-2xl tracking-tight text-white">智构<span className="text-indigo-400 font-light">·Gemini 2.0</span></h1>
             </div>
             <p className="text-[10px] text-slate-600 uppercase tracking-[0.4em] group-hover:text-indigo-400 transition-colors">AI Product Incubator</p>
           </div>
@@ -103,8 +103,8 @@ const App: React.FC = () => {
                 </span>
               </h2>
               <p className="text-slate-400 text-lg md:text-xl max-w-2xl mx-auto font-light leading-relaxed">
-                Gemini 3 Pro 驱动的下一代产品孵化器。<br className="hidden md:block"/>
-                输入您的创意草图，自动构建专业的开发规范文档。
+                Gemini 3 Pro 驱动的 V2.0 孵化器。<br className="hidden md:block"/>
+                采用“氛围编码”理念，自动构建 PM + 设计师级开发规范。
               </p>
             </div>
             
